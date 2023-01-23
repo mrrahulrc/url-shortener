@@ -4,12 +4,42 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../public/scripts/shorturl.js" defer></script>
     <title>Shortener URL</title>
 </head>
 <body>
     <h1>You can short your URL</h1>
-    <form action="/shortUrl" method="post">
-        <input type="text" name="userurl" id="URL" />
+    <form action="/shortUrl" method="post" id="formForUrl">
+        <div>
+            <label for="url">URL</label>
+            <input type="text" name="userurl" id="url" />
+        </div>
+        <div>
+            <label for="testurl"></label>
+            <a href="#" id="testurl" target="_blank">  Test Url </a>
+        </div>
+        <div>
+            <button type="submit" id="submit"> Submit</button>
+        </div>
+
+        <% if(success) {%>
+            <div>
+                <input type="text" value="<%= usershorturl %>" id="usershorturl" readonly> 
+                <button id="copytoclipboard">Copy to clip board</button>
+            </div>
+        <% } else {%>
+            <div>
+            <input type="text" value="" id="usershorturl" readonly> 
+                <button id="copytoclipboard">Copy to clip board</button>
+            </div>
+        <% }%>
+
+        <% if(isWarning) {%>
+            <div>
+                <span id="warmessage"> <%= message %> </span>
+            </div>
+        <% }%>
     </form>
+
 </body>
 </html>

@@ -22,16 +22,6 @@ router.post('/register',authcontroller.handlepostregister)
 
 router.post('/login', authcontroller.handlepostlogin)
 
-router.post('/ShortUrl', (req,res) => {
-    console.log(req.body);
-    dbcon = dbconnection()
-    dbcon.query('select * from users', (err,res)=> {
-        console.log(res[0])
-    })
-    res.render("url", {
-        URL : "here hello",
-        isShort : false
-    })
-})
+router.post('/ShortUrl', authcontroller.isUserLoggedin,  authcontroller.handleShortUrl)
 
 module.exports = router
