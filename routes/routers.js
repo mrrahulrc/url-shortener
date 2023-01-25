@@ -14,6 +14,8 @@ router.get('/shorturl',authcontroller.isUserLoggedin ,  authcontroller.handlesho
 
 router.get('/user')
 
+router.get('/:urltoken', authcontroller.handleRedirectUrl)
+
 router.get('*', (req,res) => {
     res.send("404 Not Found!")
 })

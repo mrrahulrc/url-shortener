@@ -173,3 +173,19 @@ module.exports.handleShortUrl = (req,res) => {
         }
     })
 }
+
+module.exports.handleRedirectUrl = (req,res) => {
+    const {urltoken} = req.params
+    dbconnection.query(`SELECT url FROM ${ShortUrlTable} WHERE shorturl = ?`, [urltoken], (err, data) => {
+        if(err){
+            throw err
+        }
+
+        if(data.length === 0) {
+            return res.render('notfound')
+        }
+        else{
+            res.redirect(data[0].url)
+        }
+    })
+}
